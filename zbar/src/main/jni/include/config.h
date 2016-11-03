@@ -2,28 +2,28 @@
 /* include/config.h.in.  Generated from configure.ac by autoheader.  */
 
 /* whether to build support for Code 128 symbology */
-#define ENABLE_CODE128 1
+//#define ENABLE_CODE128 1
 
 /* whether to build support for Code 39 symbology */
-#define ENABLE_CODE39 1
+//#define ENABLE_CODE39 1
 
 /* whether to build support for EAN symbologies */
-#define ENABLE_EAN 1
+//#define ENABLE_EAN 1
 
 /* whether to build support for Interleaved 2 of 5 symbology */
-#define ENABLE_I25 1
+//#define ENABLE_I25 1
 
 /* whether to build support for QR Code */
-#define ENABLE_QRCODE 1
+//#define ENABLE_QRCODE 1
 
 /* whether to build support for CodeBar */
-#define ENABLE_CODABAR 1
+//#define ENABLE_CODABAR 1
 
 /* whether to build support for Code93 */
-#define ENABLE_CODE93 1
+//#define ENABLE_CODE93 1
 
 /* whether to build support for DataBar */
-#define ENABLE_DATABAR 1
+//#define ENABLE_DATABAR 1
 
 
 /* Define to 1 if you have the `atexit' function. */

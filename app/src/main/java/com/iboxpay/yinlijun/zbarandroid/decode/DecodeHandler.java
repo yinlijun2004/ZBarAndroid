@@ -3,6 +3,7 @@ package com.iboxpay.yinlijun.zbarandroid.decode;
 import java.io.File;
 import java.io.FileOutputStream;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Environment;
 import android.os.Handler;
@@ -13,7 +14,16 @@ import com.iboxpay.yinlijun.zbarandroid.CaptureActivity;
 import com.iboxpay.yinlijun.zbarandroid.R;
 import com.iboxpay.yinlijun.zbarandroid.bitmap.PlanarYUVLuminanceSource;
 
+import android.hardware.Camera;
+import android.hardware.Camera.PreviewCallback;
+import android.hardware.Camera.AutoFocusCallback;
+import android.hardware.Camera.Size;
+
 import net.sourceforge.zbar.ImageScanner;
+import net.sourceforge.zbar.Image;
+import net.sourceforge.zbar.Symbol;
+import net.sourceforge.zbar.SymbolSet;
+import net.sourceforge.zbar.Config;
 
 /**
  * 作者: 陈涛(1076559197@qq.com)
@@ -27,9 +37,13 @@ import net.sourceforge.zbar.ImageScanner;
 final class DecodeHandler extends Handler {
 
 	CaptureActivity activity = null;
+	private ImageScanner mScanner;
 
 	DecodeHandler(CaptureActivity activity) {
 		this.activity = activity;
+		mScanner = new ImageScanner();
+		mScanner.setConfig(0, Config.X_DENSITY, 3);
+		mScanner.setConfig(0, Config.Y_DENSITY, 3);
 	}
 
 	@Override
@@ -44,57 +58,53 @@ final class DecodeHandler extends Handler {
 		}
 	}
 
-	private void decode(byte[] data, int width, int height) {
-		byte[] rotatedData = new byte[data.length];
-		for (int y = 0; y < height; y++) {
-			for (int x = 0; x < width; x++)
-				rotatedData[x * height + height - y - 1] = data[x + y * width];
+	public String GetResultByCode(int CodeType)
+	{
+		String mResult="";
+		switch(CodeType)
+		{
+			//条形码
+			case Symbol.CODABAR:
+				mResult="条形码";
+				break;
+			//128编码格式二维码)
+			case Symbol.CODE128:
+				mResult="二维码";
+				break;
+			//QR码二维码
+			case Symbol.QRCODE:
+				mResult="二维码";
+				break;
+			//ISBN10图书查询
+			case Symbol.ISBN10:
+				mResult="图书ISBN号";
+				break;
+			//ISBN13图书查询
+			case Symbol.ISBN13:
+				mResult="图书ISBN号";
+				break;
 		}
-		int tmp = width;// Here we are swapping, that's the difference to #11
-		width = height;
-		height = tmp;
+		return mResult;
+	}
 
-		ImageScanner scanner = new ImageScanner();
-		String result = "add";
-		//ZbarManager manager = new ZbarManager();
-		//String result = manager.decode(rotatedData, width, height, true, activity.getX(), activity.getY(), activity.getCropWidth(),
-		//		activity.getCropHeight());
-
-		if (result != null) {
-			if (activity.isNeedCapture()) {
-				// 生成bitmap
-				PlanarYUVLuminanceSource source = new PlanarYUVLuminanceSource(rotatedData, width, height, activity.getX(), activity.getY(),
-						activity.getCropWidth(), activity.getCropHeight(), false);
-				int[] pixels = source.renderThumbnail();
-				int w = source.getThumbnailWidth();
-				int h = source.getThumbnailHeight();
-				Bitmap bitmap = Bitmap.createBitmap(pixels, 0, w, w, h, Bitmap.Config.ARGB_8888);
-				try {
-					String rootPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Qrcode/";
-					File root = new File(rootPath);
-					if (!root.exists()) {
-						root.mkdirs();
-					}
-					File f = new File(rootPath + "Qrcode.jpg");
-					if (f.exists()) {
-						f.delete();
-					}
-					f.createNewFile();
-
-					FileOutputStream out = new FileOutputStream(f);
-					bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
-					out.flush();
-					out.close();
-				} catch (Exception e) {
-					e.printStackTrace();
+	private void decode(byte[] data, int width, int height) {
+		Image image = new Image(width, height, "Y800");
+		image.setData(data);
+		image.setCrop(activity.getY(), activity.getX(), activity.getCropHeight(), activity.getCropWidth());
+		int resultCode = mScanner.scanImage(image);
+		if (resultCode != 0)
+		{
+			SymbolSet Syms = mScanner.getResults();
+			for (Symbol mSym : Syms)
+			{
+				String str = "扫描类型:"+GetResultByCode(mSym.getType())+"\n"+ mSym.getData();
+				if (null != activity.getHandler()) {
+					Message msg = new Message();
+					msg.obj = str;
+					msg.what = R.id.decode_succeeded;
+					activity.getHandler().sendMessage(msg);
 				}
-			}
-
-			if (null != activity.getHandler()) {
-				Message msg = new Message();
-				msg.obj = result;
-				msg.what = R.id.decode_succeeded;
-				activity.getHandler().sendMessage(msg);
+				break;
 			}
 		} else {
 			if (null != activity.getHandler()) {
@@ -102,5 +112,4 @@ final class DecodeHandler extends Handler {
 			}
 		}
 	}
-
 }

@@ -173,7 +173,7 @@ public class CaptureActivity extends Activity implements Callback {
 		Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
 
 		// 连续扫描，不发送此消息扫描一次结束后就不能再次扫描
-		// handler.sendEmptyMessage(R.id.restart_preview);
+		handler.sendEmptyMessage(R.id.restart_preview);
 	}
 
 	private void initCamera(SurfaceHolder surfaceHolder) {
