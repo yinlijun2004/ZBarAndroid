@@ -1,14 +1,18 @@
 package com.iboxpay.yinlijun.zbarandroid.camera;
 
+import java.util.List;
 import java.util.regex.Pattern;
 
 import android.content.Context;
+import android.graphics.ImageFormat;
 import android.graphics.Point;
 import android.hardware.Camera;
 import android.os.Build;
 import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
+
+import net.sourceforge.zbar.Image;
 
 /**
  * 作者: 陈涛(1076559197@qq.com)
@@ -56,6 +60,7 @@ final class CameraConfigurationManager {
 	         screenResolutionForCamera.y = screenResolution.x;
 	    }
 		cameraResolution = getCameraResolution(parameters, screenResolutionForCamera);
+
 	}
 	
 	void setDesiredCameraParameters(Camera camera) {
@@ -63,7 +68,6 @@ final class CameraConfigurationManager {
 		parameters.setPreviewSize(cameraResolution.x, cameraResolution.y);
 		setFlash(parameters);
 		setZoom(parameters);
-		
 		camera.setDisplayOrientation(90);
 		camera.setParameters(parameters);
 	}
@@ -112,6 +116,7 @@ final class CameraConfigurationManager {
 		int bestX = 0;
 		int bestY = 0;
 		int diff = Integer.MAX_VALUE;
+
 		for (String previewSize : COMMA_PATTERN.split(previewSizeValueString)) {
 
 			previewSize = previewSize.trim();
@@ -140,7 +145,6 @@ final class CameraConfigurationManager {
 				bestY = newY;
 				diff = newDiff;
 			}
-
 		}
 
 		if (bestX > 0 && bestY > 0) {

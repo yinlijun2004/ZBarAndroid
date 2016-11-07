@@ -42,8 +42,10 @@ final class DecodeHandler extends Handler {
 	DecodeHandler(CaptureActivity activity) {
 		this.activity = activity;
 		mScanner = new ImageScanner();
-		mScanner.setConfig(0, Config.X_DENSITY, 3);
-		mScanner.setConfig(0, Config.Y_DENSITY, 3);
+		mScanner.setConfig(0, Config.X_DENSITY, 1);
+		mScanner.setConfig(0, Config.Y_DENSITY, 1);
+		mScanner.setConfig(0, Config.ENABLE, 0);
+		mScanner.setConfig(Symbol.QRCODE, Config.ENABLE, 1);
 	}
 
 	@Override
@@ -90,21 +92,26 @@ final class DecodeHandler extends Handler {
 	private void decode(byte[] data, int width, int height) {
 		Image image = new Image(width, height, "Y800");
 		image.setData(data);
+        image.convert("Y800");
 		image.setCrop(activity.getY(), activity.getX(), activity.getCropHeight(), activity.getCropWidth());
 		int resultCode = mScanner.scanImage(image);
+		StringBuilder sb = new StringBuilder();
 		if (resultCode != 0)
 		{
 			SymbolSet Syms = mScanner.getResults();
-			for (Symbol mSym : Syms)
-			{
-				String str = "扫描类型:"+GetResultByCode(mSym.getType())+"\n"+ mSym.getData();
-				if (null != activity.getHandler()) {
-					Message msg = new Message();
-					msg.obj = str;
-					msg.what = R.id.decode_succeeded;
-					activity.getHandler().sendMessage(msg);
-				}
-				break;
+			for (Symbol mSym : Syms) {
+				sb.append("扫描类型:");
+				sb.append(GetResultByCode(mSym.getType()));
+				sb.append("\n");
+				sb.append(mSym.getData());
+				sb.append("\n");
+			}
+
+			if (null != activity.getHandler()) {
+				Message msg = new Message();
+				msg.obj = sb.toString();
+				msg.what = R.id.decode_succeeded;
+				activity.getHandler().sendMessage(msg);
 			}
 		} else {
 			if (null != activity.getHandler()) {

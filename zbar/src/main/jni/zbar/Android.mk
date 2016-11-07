@@ -49,65 +49,15 @@ LOCAL_SRC_FILES :=	convert.c \
 					video/null.c \
 					window/null.c \
 					config.c \
+					decoder/qr_finder.c \
+                    decoder/code128.c \
+                    decoder/code39.c \
+                    decoder/code93.c \
+                    decoder/codabar.c \
+                    decoder/ean.c \
+                    decoder/databar.c \
+                    decoder/i25.c \
 					zbarjni.c
-#decoder/qr_finder.c \
-#decoder/code128.c \
-#decoder/code39.c \
-#decoder/code93.c \
-#decoder/codabar.c \
-#decoder/ean.c \
-#decoder/databar.c \
-#decoder/i25.c \
-
-#ENABLE_EAN := true
-#ENABLE_CODE39 := true
-#ENABLE_I25 := true
-#ENABLE_CODE128 := true
-ENABLE_QRCODE := true
-#ENABLE_CODABAR := true
-#ENABLE_CODE93 := true
-#ENABLE_DATABAR := true
-
-ifdef ENABLE_EAN
-LOCAL_CFLAGS += -DENABLE_EAN
-LOCAL_SRC_FILES += decoder/ean.c
-endif
-
-ifdef ENABLE_CODE39
-LOCAL_CFLAGS += -DENABLE_CODE39
-LOCAL_SRC_FILES += decoder/code39.c
-endif
-
-ifdef ENABLE_I25
-LOCAL_CFLAGS += -DENABLE_I25
-LOCAL_SRC_FILES += decoder/i25.c
-endif
-
-ifdef ENABLE_CODE128
-LOCAL_CFLAGS += -DENABLE_CODE128
-LOCAL_SRC_FILES += decoder/code128.c
-endif
-
-ifdef ENABLE_CODABAR
-LOCAL_CFLAGS += -DENABLE_CODABAR
-LOCAL_SRC_FILES += decoder/codabar.c
-endif
-
-ifdef ENABLE_CODE93
-LOCAL_CFLAGS += -DENABLE_CODE93
-LOCAL_SRC_FILES += decoder/code93.c
-endif
-
-ifdef ENABLE_DATABAR
-LOCAL_CFLAGS += -DENABLE_DATABAR
-LOCAL_SRC_FILES += decoder/databar.c
-
-endif
-
-ifdef ENABLE_QRCODE
-LOCAL_CFLAGS += -DENABLE_QRCODE
-LOCAL_SRC_FILES += decoder/qr_finder.c
-endif
 
 $(warning $(LOCAL_CFLAGS))
 

@@ -1,29 +1,29 @@
-/home/yinlijun/github/box/ZBarAndroid/zbar/src/main/obj/local/arm64-v8a/objs/zbarjni/window.o: \
-  /home/yinlijun/github/box/ZBarAndroid/zbar/src/main/jni/zbar/window.c \
-  /home/yinlijun/github/box/ZBarAndroid/zbar/src/main/jni/zbar/window.h \
-  /home/yinlijun/github/box/ZBarAndroid/zbar/src/main/jni/zbar/../include/config.h \
-  /home/yinlijun/github/box/ZBarAndroid/zbar/src/main/jni/zbar/../include/zbar.h \
-  /home/yinlijun/github/box/ZBarAndroid/zbar/src/main/jni/zbar/symbol.h \
-  /home/yinlijun/github/box/ZBarAndroid/zbar/src/main/jni/zbar/refcnt.h \
-  /home/yinlijun/github/box/ZBarAndroid/zbar/src/main/jni/zbar/error.h \
-  /home/yinlijun/github/box/ZBarAndroid/zbar/src/main/jni/zbar/mutex.h \
-  /home/yinlijun/github/box/ZBarAndroid/zbar/src/main/jni/zbar/image.h \
-  /home/yinlijun/github/box/ZBarAndroid/zbar/src/main/jni/zbar/timer.h
+D:/Android/github/ZBarAndroid/zbar/src/main/obj/local/arm64-v8a/objs/zbarjni/window.o: \
+  D:/Android/github/ZBarAndroid/zbar/src/main/jni/zbar/window.c \
+  D:/Android/github/ZBarAndroid/zbar/src/main/jni/zbar/window.h \
+  D:/Android/github/ZBarAndroid/zbar/src/main/jni/zbar/../include\config.h \
+  D:/Android/github/ZBarAndroid/zbar/src/main/jni/zbar/../include\zbar.h \
+  D:/Android/github/ZBarAndroid/zbar/src/main/jni/zbar/symbol.h \
+  D:/Android/github/ZBarAndroid/zbar/src/main/jni/zbar/refcnt.h \
+  D:/Android/github/ZBarAndroid/zbar/src/main/jni/zbar/error.h \
+  D:/Android/github/ZBarAndroid/zbar/src/main/jni/zbar/mutex.h \
+  D:/Android/github/ZBarAndroid/zbar/src/main/jni/zbar/image.h \
+  D:/Android/github/ZBarAndroid/zbar/src/main/jni/zbar/timer.h
 
-/home/yinlijun/github/box/ZBarAndroid/zbar/src/main/jni/zbar/window.h:
+D:/Android/github/ZBarAndroid/zbar/src/main/jni/zbar/window.h:
 
-/home/yinlijun/github/box/ZBarAndroid/zbar/src/main/jni/zbar/../include/config.h:
+D:/Android/github/ZBarAndroid/zbar/src/main/jni/zbar/../include\config.h:
 
-/home/yinlijun/github/box/ZBarAndroid/zbar/src/main/jni/zbar/../include/zbar.h:
+D:/Android/github/ZBarAndroid/zbar/src/main/jni/zbar/../include\zbar.h:
 
-/home/yinlijun/github/box/ZBarAndroid/zbar/src/main/jni/zbar/symbol.h:
+D:/Android/github/ZBarAndroid/zbar/src/main/jni/zbar/symbol.h:
 
-/home/yinlijun/github/box/ZBarAndroid/zbar/src/main/jni/zbar/refcnt.h:
+D:/Android/github/ZBarAndroid/zbar/src/main/jni/zbar/refcnt.h:
 
-/home/yinlijun/github/box/ZBarAndroid/zbar/src/main/jni/zbar/error.h:
+D:/Android/github/ZBarAndroid/zbar/src/main/jni/zbar/error.h:
 
-/home/yinlijun/github/box/ZBarAndroid/zbar/src/main/jni/zbar/mutex.h:
+D:/Android/github/ZBarAndroid/zbar/src/main/jni/zbar/mutex.h:
 
-/home/yinlijun/github/box/ZBarAndroid/zbar/src/main/jni/zbar/image.h:
+D:/Android/github/ZBarAndroid/zbar/src/main/jni/zbar/image.h:
 
-/home/yinlijun/github/box/ZBarAndroid/zbar/src/main/jni/zbar/timer.h:
+D:/Android/github/ZBarAndroid/zbar/src/main/jni/zbar/timer.h:
