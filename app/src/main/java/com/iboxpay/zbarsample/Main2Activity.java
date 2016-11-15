@@ -10,7 +10,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Date;
 
-import com.iboxpay.zbarandroid.CaptureActivity;
+import net.sourceforge.zbar.Symbol;
 
 public class Main2Activity extends AppCompatActivity implements View.OnClickListener {
     private static final int REQUEST_CODE_SCAN = 1;
@@ -24,9 +24,11 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
 
     private void startCaptureActivity() {
         ArrayList<Integer> symbols = new ArrayList<Integer>();
-        symbols.add(0);
+        //supported code type
+        symbols.add(Symbol.QRCODE);
+        symbols.add(Symbol.EAN13);
         Intent intent = new Intent();
-        intent.setClass(this, CaptureActivity.class);
+        intent.setClassName("com.iboxpay.zbarandroid", "com.iboxpay.zbarandroid.CaptureActivity");
         intent.putExtra("symbols", symbols);
         intent.putExtra("start", new Date().getTime());
         startActivityForResult(intent, REQUEST_CODE_SCAN);

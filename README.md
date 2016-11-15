@@ -1,10 +1,38 @@
+This project contains two modules: app, zbarscanner.
 
-目前只支持QRCODE扫码，如需要支持其他扫码，可以在app/src/main/java/com/iboxpay/yinlijun/zbarandroid/decode/DecodeHandler.java中修改:
+app is a module introduce to how to use module zbarscanner.
+zbarscanner is a module contains zbar source code.
+
+Usage:
+
+- import zbarscanner in build.gradle dependencies
 ```
-		mScanner.setConfig(0, Config.ENABLE, 0);
-		mScanner.setConfig(Symbol.QRCODE, Config.ENABLE, 1);
+    compile 'com.terminald:zbarscanner:1.0.2'
 ```
-修改为：
+
+- Start activity with code types you want to support.
+```java
+        ArrayList<Integer> symbols = new ArrayList<Integer>();
+        //supported code type
+        symbols.add(Symbol.QRCODE);
+        symbols.add(Symbol.EAN13);
+        Intent intent = new Intent();
+        intent.setClassName("com.iboxpay.zbarandroid", "com.iboxpay.zbarandroid.CaptureActivity");
+        intent.putExtra("symbols", symbols);
+        intent.putExtra("start", new Date().getTime());
+        startActivityForResult(intent, REQUEST_CODE_SCAN);
 ```
-		mScanner.setConfig(0, Config.ENABLE, 1);
-```
+
+- Get scan result in activity onActivityResult callback.
+```java
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == Main2Activity.REQUEST_CODE_SCAN  && resultCode == RESULT_OK) {
+            String result = data.getStringExtra("result");
+            Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "scan failed", Toast.LENGTH_SHORT).show();
+        }
+    }
+ ```
