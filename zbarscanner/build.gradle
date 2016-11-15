@@ -48,6 +48,8 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+
+    compile 'com.android.support:design:25.0.0'
     compile 'com.android.support:appcompat-v7:25.0.0'
     testCompile 'junit:junit:4.12'
 }
@@ -57,7 +59,7 @@ publish {
     userOrg = 'terminald'//bintray.com用户名
     groupId = 'com.terminald'//jcenter上的路径
     artifactId = 'zbarscanner'//项目名称
-    publishVersion = '1.0.2'//版本号
+    publishVersion = '1.0.5'//版本号
     desc = 'a zbar scanner based on android'//描述，不重要
     website = 'https://github.com/yuinlijun2004/ZBarAndroid'//网站，不重要；尽量模拟github上的地址，例如我这样的；当然你有地址最好了
 }
