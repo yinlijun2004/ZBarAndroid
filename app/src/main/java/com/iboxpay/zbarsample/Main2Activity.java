@@ -29,9 +29,20 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         //supported code type
         symbols.add(Symbol.QRCODE);
         symbols.add(Symbol.EAN13);
+
+        //way 1
+        //declare activity in AndroidManifest.xml first
+        //Intent intent = new Intent(MainActivity.this, CaptureActivity.class);
+
+        //way 2
+        //Intent intent = new Intent("com.iboxpay.zbarandroid.scan");
+        //这里的packetname 一定记住填写 掉用方的packetname 因为 aar最终会被合并到调用方的manifest文件
+        //intent.setComponent(new ComponentName("com.iboxpay.zbarsample", "com.iboxpay.zbarandroid.CaptureActivity"));
+
+        //way 3
         Intent intent = new Intent();
-        //intent.setClassName("com.iboxpay.zbarandroid", "com.iboxpay.zbarandroid.CaptureActivity");
-        intent.setClass(Main2Activity.this, CaptureActivity.class);
+        intent.setClassName(Main2Activity.class.getPackage().getName(), CaptureActivity.class.getCanonicalName());
+
         intent.putExtra("symbols", symbols);
         intent.putExtra("start", new Date().getTime());
         startActivityForResult(intent, REQUEST_CODE_SCAN);
